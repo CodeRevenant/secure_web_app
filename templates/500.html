@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h1 class="display-1 fw-bold text-danger">500</h1>
+                    <h2 class="mb-4">System Error</h2>
+                    <p class="text-muted mb-4">
+                        Something went wrong on our end. Don't worry, our security audit logs have captured this event for the administrator to review.
+                    </p>
+                    <a href="{% url 'task_list' %}" class="btn btn-outline-secondary px-4">
+                        Try Refreshing the Page
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

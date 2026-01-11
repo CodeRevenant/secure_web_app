@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0"><i class="bi bi-shield-lock"></i> Secure Login</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}<div class="text-danger small">{{ form.username.errors }}</div>{% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Password</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}<div class="text-danger small">{{ form.password.errors }}</div>{% endif %}
+                    </div>
+
+                    <div class="mb-3 border p-3 rounded bg-light text-center">
+                        <label class="form-label d-block fw-bold text-primary mb-2">Security Verification</label>
+                        
+                        <div class="captcha-render-box">
+                            {% if form.captcha %}
+                                {# This renders the image and hidden fields manually #}
+                                {{ form.captcha }}
+                            {% else %}
+                                <p class="text-danger small">System Error: Captcha field missing.</p>
+                            {% endif %}
+                        </div>
+
+                        {% if form.captcha.errors %}
+                            {% for error in form.captcha.errors %}
+                                <div class="text-danger small fw-bold mt-2">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        <small class="text-muted d-block mt-2">Enter the code shown in the image above.</small>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-sm">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-white border-0 py-3">
+                <p class="mb-0">New user? <a href="{% url 'register' %}" class="text-decoration-none fw-bold">Create an Account</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* This CSS targets exactly what django-simple-captcha outputs */
+    .captcha-render-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    /* Target the generated image */
+    .captcha-render-box img.captcha {
+        border: 2px solid #0d6efd;
+        border-radius: 6px;
+        background: white;
+        padding: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Target the text input for the captcha */
+    .captcha-render-box input[type="text"] {
+        width: 100% !important;
+        text-align: center;
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 8px;
+    }
+</style>
+{% endblock %}

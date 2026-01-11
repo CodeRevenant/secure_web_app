@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-8 text-center">
+    <div class="card shadow-lg border-0 p-4">
+      <h1 class="display-5 fw-bold mb-3">Welcome to Secure Task Manager</h1>
+      <p class="lead text-muted mb-4">Create tasks, track progress, and manage securely with built-in protections.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <button type="button" class="btn btn-primary btn-lg shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg">Register</a>
+      </div>
+
+      <!-- Login Modal -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="loginModalLabel">Secure Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Username</label>
+                  {{ login_form.username }}
+                  {% if login_form.username.errors %}<div class="text-danger small">{{ login_form.username.errors }}</div>{% endif %}
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Password</label>
+                  {{ login_form.password }}
+                  {% if login_form.password.errors %}<div class="text-danger small">{{ login_form.password.errors }}</div>{% endif %}
+                </div>
+
+                <div class="mb-3 border p-3 rounded bg-light text-center">
+                  <label class="form-label d-block fw-bold text-primary mb-2">Security Verification</label>
+                  <div class="captcha-render-box">
+                    {% if login_form.captcha %}
+                      {{ login_form.captcha }}
+                    {% else %}
+                      <p class="text-danger small">System Error: Captcha field missing.</p>
+                    {% endif %}
+                  </div>
+                  {% if login_form.captcha.errors %}
+                    {% for error in login_form.captcha.errors %}
+                      <div class="text-danger small fw-bold mt-2">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                  <small class="text-muted d-block mt-2">Enter the code shown in the image above.</small>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+
+                <div class="text-center mt-3">
+                  <a href="{% url 'login' %}" class="small">Open full login page</a>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    .display-5 { color: #0d6efd; }
+    .lead { max-width: 720px; margin: 0 auto 1rem; }
+</style>
+{% endblock %}
