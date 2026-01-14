@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Task
-from .forms import TaskForm  # You need to create this in tasks/forms.py
+from .forms import TaskForm
 from auditlog.models import AuditLog
 
 @login_required
 def task_list(request):
+    # --- TEMPORARY 500 ERROR TRIGGER FOR REPORT ---
+    # Delete the line below after you get your screenshot!
+
     # RBAC implementation: Admins see all, Users see only their own
     if request.user.is_staff or request.user.groups.filter(name="Admin").exists():
         tasks = Task.objects.all()
