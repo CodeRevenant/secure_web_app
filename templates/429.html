@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert: Access Restricted</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .security-container {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            border-top: 6px solid #dc3545; /* Red Security Line */
+        }
+        h1 {
+            color: #dc3545;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .ip-info {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="security-container">
+        <span class="icon">🛡️</span>
+        <h1>429 - Too Many Requests</h1>
+        
+        <p><strong>Security Alert:</strong> Unusual traffic detected from your network.</p>
+        
+        <p>To protect our users and system integrity, we have temporarily blocked login attempts from your IP address. This automatic lockout will expire in <strong>15 minutes</strong>.</p>
+        
+        <div class="ip-info">
+            Error Code: HTTP 429<br>
+            Reason: Rate Limit Exceeded (Brute Force Protection)
+        </div>
+
+        <a href="/" class="btn">Return to Home</a>
+    </div>
+
+</body>
+</html>
