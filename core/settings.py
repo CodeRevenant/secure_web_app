@@ -117,3 +117,15 @@ else:
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+# Add this block to enable caching (Memory storage for Rate Limiting)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Rate Limit Configuration
+RATELIMIT_ENABLE = True
+RATELIMIT_USE_CACHE = 'default'

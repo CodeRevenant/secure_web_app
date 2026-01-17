@@ -1,18 +1,17 @@
+# accounts/urls.py
 from django.urls import path
-from django.contrib.auth import views as auth_views
-from . import views
-from .views import logout_view
-from .forms import SecureLoginForm
+from . import views # Imports your custom views with Rate Limiting and Audit Logs
 
 urlpatterns = [
     path("", views.home, name="home"),
     path("register/", views.register, name="register"),
-    path("login/", auth_views.LoginView.as_view(authentication_form=SecureLoginForm), name="login"),
-    path(
-        "logout/",
-        auth_views.LogoutView.as_view(next_page="/login/"),
-        name="logout",
-    ),
+    
+    # ✅ CORRECT: Now using your custom function from views.py
+    path("login/", views.login_view, name="login"), 
+    
+    # ✅ CORRECT: Now using your custom function to record Audit Logs
+    path("logout/", views.logout_view, name="logout"),
+    
     path("profile/", views.profile, name="profile"),
     path("audit-logs/", views.audit_logs, name="audit_logs"),
 ]

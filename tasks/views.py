@@ -7,7 +7,7 @@ from auditlog.models import AuditLog
 @login_required
 def task_list(request):
     # --- TEMPORARY 500 ERROR TRIGGER FOR REPORT ---
-    # Delete the line below after you get your screenshot!
+    
 
     # RBAC implementation: Admins see all, Users see only their own
     if request.user.is_staff or request.user.groups.filter(name="Admin").exists():
